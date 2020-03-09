@@ -16,9 +16,3 @@ cc_binary(
     name = "addition_and_subtraction",
     srcs = ["addition_and_subtraction.cc"],
 )
-
-cc_binary(
-    name = "hello",
-    srcs = ["hello.cc"],
-)
-
