@@ -26,3 +26,9 @@ cc_binary(
     name = "erasing_maximum",
     srcs = ["erasing_maximum.cc"],
 )
+
+cc_binary(
+    name = "evaluation",
+    srcs = ["evaluation.cc"],
+)
+
