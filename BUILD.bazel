@@ -32,3 +32,15 @@ cc_binary(
     srcs = ["evaluation.cc"],
 )
 
+cc_binary(
+    name = "king",
+    srcs = ["king.cc"],
+)
+
+cc_binary(
+    name = "minimums_sum",
+    srcs = ["minimums_sum.cc"],
+)
+
+
+
