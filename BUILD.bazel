@@ -42,5 +42,10 @@ cc_binary(
     srcs = ["minimums_sum.cc"],
 )
 
+cc_binary(
+    name = "compare_sums",
+    srcs = ["compare_sums.cc"],
+)
+
 
 
