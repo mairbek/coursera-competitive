@@ -14,13 +14,11 @@ int main(int argc, const char** argv) {
 
   std::cin >> r >> c;
 
-
   float n = r;
   float m = c;
 
   float result = ceil(n / 3) * ceil (m / 3);
 
-
   int count = (r * c) - result;
-  std::cout << std::max(count, 1) << std::endl;
+  std::cout << count << std::endl;
 }
