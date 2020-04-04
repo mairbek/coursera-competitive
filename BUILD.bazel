@@ -47,5 +47,10 @@ cc_binary(
     srcs = ["compare_sums.cc"],
 )
 
+cc_binary(
+    name = "round_up",
+    srcs = ["round_up.cc"],
+)
+
 
 
