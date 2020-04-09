@@ -56,3 +56,9 @@ cc_binary(
     name = "frequent_symbol",
     srcs = ["frequent_symbol.cc"],
 )
+
+cc_binary(
+    name = "frequent_symbol_prefix",
+    srcs = ["frequent_symbol_prefix.cc"],
+)
+
