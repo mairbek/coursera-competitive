@@ -52,5 +52,7 @@ cc_binary(
     srcs = ["round_up.cc"],
 )
 
-
-
+cc_binary(
+    name = "frequent_symbol",
+    srcs = ["frequent_symbol.cc"],
+)
