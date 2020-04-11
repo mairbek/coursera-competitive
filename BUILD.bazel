@@ -62,3 +62,9 @@ cc_binary(
     srcs = ["frequent_symbol_prefix.cc"],
 )
 
+cc_binary(
+    name = "distance",
+    srcs = ["distance.cc"],
+)
+
+
