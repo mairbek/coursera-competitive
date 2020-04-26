@@ -87,3 +87,7 @@ cc_binary(
     srcs = ["lis.cc"],
 )
 
+cc_binary(
+    name = "sum",
+    srcs = ["sum.cc"],
+)
