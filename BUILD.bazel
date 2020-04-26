@@ -67,4 +67,23 @@ cc_binary(
     srcs = ["distance.cc"],
 )
 
+cc_binary(
+    name = "manhattan",
+    srcs = ["manhattan.cc"],
+)
+
+cc_binary(
+    name = "maximalsum",
+    srcs = ["maximalsum.cc"],
+)
+
+cc_binary(
+    name = "edit_distance",
+    srcs = ["edit_distance.cc"],
+)
+
+cc_binary(
+    name = "lis",
+    srcs = ["lis.cc"],
+)
 
