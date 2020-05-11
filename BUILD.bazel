@@ -91,3 +91,13 @@ cc_binary(
     name = "sum",
     srcs = ["sum.cc"],
 )
+
+cc_binary(
+    name = "make_sorted",
+    srcs = ["make_sorted.cc"],
+)
+
+cc_binary(
+    name = "maximal_square",
+    srcs = ["maximal_square.cc"],
+)
