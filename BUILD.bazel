@@ -68,11 +68,6 @@ cc_binary(
 )
 
 cc_binary(
-    name = "manhattan",
-    srcs = ["manhattan.cc"],
-)
-
-cc_binary(
     name = "maximalsum",
     srcs = ["maximalsum.cc"],
 )
@@ -106,3 +101,9 @@ cc_binary(
     name = "lcs",
     srcs = ["lcs.cc"],
 )
+
+cc_binary(
+    name = "primes",
+    srcs = ["primes.cc"],
+)
+
