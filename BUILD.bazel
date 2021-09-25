@@ -107,9 +107,12 @@ cc_binary(
     srcs = ["primes.cc"],
 )
 
-
 cc_binary(
     name = "factorization",
     srcs = ["factorization.cc"],
 )
 
+cc_binary(
+    name = "nearest_prime",
+    srcs = ["nearest_prime.cc"],
+)
