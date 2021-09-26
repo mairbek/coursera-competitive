@@ -116,3 +116,8 @@ cc_binary(
     name = "nearest_prime",
     srcs = ["nearest_prime.cc"],
 )
+
+cc_binary(
+    name = "gcd",
+    srcs = ["gcd.cc"],
+)
