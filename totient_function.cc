@@ -9,27 +9,18 @@ namespace
 
 using int64 = long long;
 
-int mulmod(int a, int b, int mod)
-{
-    int res = 0; // Initialize result
-    a = a % mod;
-    while (b > 0)
-    {
-        // If b is odd, add 'a' to result
-        if (b % 2 == 1)
-            res = (res + a) % mod;
- 
-        // Multiply 'a' with 2
-        a = (a * 2) % mod;
- 
-        // Divide b by 2
-        b /= 2;
+int mulmod(int a, int b, int mod) {
+  int res = 0;
+  a = a % mod;
+  while (b > 0) {
+    if (b % 2 == 1) {
+      res = (res + a) % mod;
     }
- 
-    // Return result
-    return res % mod;
+    a = (a * 2) % mod;
+    b /= 2;
+  }
+ return res % mod;
 }
-
 
 int pow(int x, int n, int p) {
   if (n == 0) {
@@ -50,8 +41,6 @@ int pow(int x, int n, int p) {
 }
 
 int main(int argc, const char **argv) {
-  // std::cout << pow(2, 6, 535252)
-
   int n, m, p;
 
   std::cin >> n >> m >> p;
@@ -80,15 +69,12 @@ int main(int argc, const char **argv) {
       vp = (vp - ((n-m)/pi) % p) % p;
       pi *= pp;
     }
-    // std::cout << "primus " << pp << " " << vp << std::endl;
     if (vp == 0) {
       continue;
     }
-    // std::cout << "pepe " << pow(pp, vp, p) << "-" << pow(pp, vp - 1, p) << " " << result << std::endl;
     int vpnk = (pow(pp, vp, p) - pow(pp, vp - 1, p)) % p;
     result = mulmod(result, vpnk, p);
     if (result == 0) {
-      // std::cout << "wtf";
       return 0;
     }
   }
