@@ -131,3 +131,7 @@ cc_binary(
     name = "factorials_zero",
     srcs = ["factorials_zero.cc"],
 )
+cc_binary(
+    name = "totient_function",
+    srcs = ["totient_function.cc"],
+)
