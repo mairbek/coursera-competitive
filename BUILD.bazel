@@ -126,3 +126,8 @@ cc_binary(
     name = "fraction",
     srcs = ["fraction.cc"],
 )
+
+cc_binary(
+    name = "factorials_zero",
+    srcs = ["factorials_zero.cc"],
+)
