@@ -140,3 +140,18 @@ cc_binary(
     name = "factorial_subtraction",
     srcs = ["factorial_subtraction.cc"],
 )
+
+cc_binary(
+    name = "sequence_sum",
+    srcs = ["sequence_sum.cc"],
+)
+
+cc_binary(
+    name = "chinese_remainder_theorem",
+    srcs = ["chinese_remainder_theorem.cc"],
+)
+
+cc_binary(
+    name = "restore_polynomial",
+    srcs = ["restore_polynomial.cc"],
+)
