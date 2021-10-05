@@ -41,9 +41,9 @@ int crt(const std::vector<int>& a, const std::vector<int>& m) {
     prod *= m[i];
   }
   int result = 0;
-    for (int i = 0; i < k; i++) {
-      int pp = prod / m[i];
-      result += a[i] * mod_inv(pp, m[i]) * pp;
+  for (int i = 0; i < k; i++) {
+    int pp = prod / m[i];
+    result += a[i] * mod_inv(pp, m[i]) * pp;
   }
   return result % prod;
 }
@@ -74,6 +74,48 @@ int mod_pow(int x, int n, int p) {
     x = mod_mul(x, x, p);
   }
   return mod_mul(x, y, p);
+}
+
+int pow(int x, int n) {
+  if (n == 0) {
+    return 0;
+  }
+  int y = 1;
+  while (n > 1) {
+    if (n % 2 == 0) {
+      n = n / 2;
+    } else {
+      y = x * y;
+      n = (n - 1) / 2;
+    }
+    x = x * x;
+  }
+  return x * y;
+}
+
+int mod_div(int a, int b, int m) {
+  a = a % m;
+  int inv = mod_inv(b, m);
+  return mod_mul(a, inv, m);
+}
+
+int mod_geosum(int a, int n, int m) {
+  if (n == 0) {
+    return 1;
+  }
+  int a1 = mod_sum(a, 1, m);
+  if (n == 1) {
+    return a1;
+  }
+  int aa = mod_mul(a, a, m);
+  if (n % 2 == 1) {
+    int rec = mod_geosum(aa, (n-1) / 2, m);
+    return mod_mul(rec, a1, m);
+  }
+  int rec = mod_geosum(aa,  n/2 - 1, m);
+  rec = mod_mul(rec, a, m);
+  rec = mod_mul(rec, a1, m);
+  return mod_sum(rec, 1, m);
 }
 
 int main(int argc, const char** argv) {
@@ -107,48 +149,52 @@ int main(int argc, const char** argv) {
       factors[p] = 0;
     }
     factors[p] += 1;
-    // std::cout << "factor " << p << std::endl; 
     mm /= p;
   }
 
   std::vector<int> mods;
-  std::vector<int> sum;
-  int j = 0;
+  std::vector<int> sums;
   for (auto const& pf : factors) {
     int p = pf.first;
     int k = pf.second;
     int pk = pow(p, k);
     int phi = pk - pk/p;
     mods.push_back(pk);
-    sum.push_back(0);
+    int sum = 0;
 
-    // int upp = std::min(n, pk + phi);
-    // for (int i = 1; i <= upp; i++) {
-    //   int pw = mod_pow(i, i % phi, pk);
-    //   int nn = (n - i) / phi + 1;
-    //   std::cout << "i=" << i << " n= " << n << " pk=" << pk << " phi=" << phi << " nn=" << nn << std::endl;
-    //   pw = mod_mul(pw, nn, pk);
-    //   sum[j] = mod_sum(sum[j], pw, pk);
-    // }
-    // j++;
-    for (int i = 0; i <= pk; i++) {
-      int pw = mod_pow(i, i % phi, pk);
-      sum[j] = mod_sum(sum[j], pw, pk);
-      for (int j = 0; j < n/pk; j++) {
-        pw = mod_mul(pw, i, pk);
-        sum[j] = mod_sum(sum[j], pw, pk);
+    for (int i = 1; i <= std::min(pk, n); i++) {
+      int ii = mod_pow(i, i, pk);
+      int total_ii = (n-i) / pk + 1;
+      int rings = total_ii / phi;
+      int rem = total_ii % phi;
+
+      if (i == 1) {
+        int ssum = mod_mul(rings, phi, pk);
+        ssum = mod_sum(ssum, rem, pk);
+        sum = mod_sum(sum, ssum, pk);
+        continue;
       }
+      int ring_sum = mod_geosum(i, phi-1, pk);
+      int rem_sum1 = 0;
+      if (rem > 0) {
+        rem_sum1 = mod_geosum(i, rem-1, pk);
+      }
+
+      int total_sum = mod_mul(ring_sum, rings, pk);
+      total_sum = mod_sum(total_sum, rem_sum1, pk);
+      total_sum = mod_mul(total_sum, ii, pk);
+      sum = mod_sum(sum, total_sum, pk);
     }
+    sums.push_back(sum);
+    std::cout << pk << " " << sum << std::endl;
   }
-  std::cout << crt(sum, mods) << std::endl;
-
-  // int sum = 0;
-  // for (int i = 1; i <= n; i++) {
-  //   int t = mod_pow(i, i, m);
-  //   sum = mod_sum(sum, t, m);
-  // }
-
-  // std::cout << sum << std::endl;
+  int r = crt(sums, mods);
+  std::cout << r << std::endl;
 
   return 0;
 }
+
+
+// 1684520592 100000
+//  64613 
+// 100000

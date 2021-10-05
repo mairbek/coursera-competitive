@@ -155,3 +155,7 @@ cc_binary(
     name = "restore_polynomial",
     srcs = ["restore_polynomial.cc"],
 )
+cc_binary(
+    name = "mod_geom",
+    srcs = ["mod_geom.cc"],
+)
