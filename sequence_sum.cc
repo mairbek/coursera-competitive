@@ -8,35 +8,20 @@ namespace {
 
 using int64 = long long;
 
-int gcd(int a, int b) {
-  if (b > a) {
-    int tmp = a;
-    a = b;
-    b = tmp;
-  }
-
-  while (b > 0) {
-    int temp = a;
-    a = b;
-    b = temp % b;
-  }
-  return a;
-}
-
 int phifun(int n) {
-    int result = n;
-    for (int i = 2; i * i <= n; i++) {
-        if (n % i == 0) {
-            while (n % i == 0)
-                n /= i;
-            result -= result / i;
-        }
-    }
-    if (n > 1)
-        result -= result / n;
-    return result;
+  int result = n;
+  for (int i = 2; i * i <= n; i++) {
+      if (n % i == 0) {
+          while (n % i == 0) {
+            n /= i;
+          }
+          result -= result / i;
+      }
+  }
+  if (n > 1)
+      result -= result / n;
+  return result;
 }
-
 
 int mod_mul(int a, int b, int m) {
   int64 t = ((int64) a) * b;
@@ -86,7 +71,8 @@ int mod_geosum(int a, int n, int m) {
 }
 
 int main(int argc, const char** argv) {
-  int n, m;
+  int64 n;
+  int m;
 
   std::cin >> n >> m;
 
@@ -95,36 +81,21 @@ int main(int argc, const char** argv) {
   int shift_pow = pk - phi;
   int sum = 0;
 
-  for (int i = 1; i <= std::min(pk, n); i++) {
+  int maxn = pk;
+  if (pk > n) {
+    // safe to convert from int64
+    maxn = n;
+  }
+
+  for (int i = 1; i <= maxn; i++) {
     int ii = mod_pow(i, i, pk);
     int total_ii = (n-i) / pk + 1;
-    int rings = total_ii / phi;
-    int rem = total_ii % phi;
-
-    if (i == 1) {
-      int ssum = mod_mul(rings, phi, pk);
-      ssum = mod_sum(ssum, rem, pk);
-      sum = mod_sum(sum, ssum, pk);
-      continue;
-    }
-
-    int igcd = mod_pow(i, shift_pow, pk);
-    int ring_sum = mod_geosum(igcd, phi-1, pk);
-    int rem_sum = 0;
-    if (rem > 0) {
-      rem_sum = mod_geosum(igcd, rem-1, pk);
-    }
-
-    int total_sum = mod_mul(ring_sum, rings, pk);
-    total_sum = mod_sum(total_sum, rem_sum, pk);
+    int ipow = mod_pow(i, shift_pow, pk);
+    // TODO it must be possible to reduce total_ii here.
+    int total_sum = mod_geosum(ipow, total_ii-1, pk);
     total_sum = mod_mul(total_sum, ii, pk);
     sum = mod_sum(sum, total_sum, pk);
   }
   std::cout << sum << std::endl;
   return 0;
 }
-
-
-// 1684520592 100000
-//  64613 
-// 100000
