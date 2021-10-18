@@ -163,5 +163,9 @@ cc_binary(
 cc_binary(
     name = "modular_equation",
     srcs = ["modular_equation.cc"],
-    linkopts = ["-ldl"],
+)
+
+cc_binary(
+    name = "fibonacci_sum_squared",
+    srcs = ["fibonacci_sum_squared.cc"],
 )
