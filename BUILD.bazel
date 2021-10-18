@@ -159,3 +159,9 @@ cc_binary(
     name = "mod_geom",
     srcs = ["mod_geom.cc"],
 )
+
+cc_binary(
+    name = "modular_equation",
+    srcs = ["modular_equation.cc"],
+    linkopts = ["-ldl"],
+)
