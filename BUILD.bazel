@@ -169,3 +169,8 @@ cc_binary(
     name = "fibonacci_sum_squared",
     srcs = ["fibonacci_sum_squared.cc"],
 )
+
+cc_binary(
+    name = "roots_of_unity",
+    srcs = ["roots_of_unity.cc"],
+)
